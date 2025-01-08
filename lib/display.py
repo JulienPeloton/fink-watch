@@ -84,30 +84,30 @@ def screen(width=240, height=240, progression=120000):
     )
 
     # Third rings
-    draw.arc((30, 30, width - 30, height - 30), 0, 360, fill=(*framboise, 120), width=8)
+    draw.arc((scale(width, 12.5), scale(height, 12.5), width - scale(width, 12.5), height - scale(height, 12.5)), 0, 360, fill=(*framboise, 120), width=8)
     draw.arc(
-        (30, 30, width - 30, height - 30),
+        (scale(width, 12.5), scale(height, 12.5), width - scale(width, 12.5), height - scale(height, 12.5)),
         90,
         int(progression_deg),
         fill=framboise,
         width=8,
     )
 
-    # Ticks
+    # Ticks major/minor
     step_major_ticks = 10
     step_minor_ticks = 2
     for angle in range(min_progression_deg, max_progression_deg, step_major_ticks):
-        x0 = width / 2 + (width / 2 - scale(width, 10)) * np.cos(np.deg2rad(angle))
-        y0 = height / 2 + (height / 2 - scale(height, 10)) * np.sin(np.deg2rad(angle))
-        x1 = width / 2 + (width / 2 - scale(width, 12.5)) * np.cos(np.deg2rad(angle))
-        y1 = height / 2 + (height / 2 - scale(height, 12.5)) * np.sin(np.deg2rad(angle))
+        x0 = width / 2 + (width / 2 - scale(width, 9.5)) * np.cos(np.deg2rad(angle))
+        y0 = height / 2 + (height / 2 - scale(height, 9.5)) * np.sin(np.deg2rad(angle))
+        x1 = width / 2 + (width / 2 - scale(width, 12)) * np.cos(np.deg2rad(angle))
+        y1 = height / 2 + (height / 2 - scale(height, 12)) * np.sin(np.deg2rad(angle))
         draw.line([(x0, y0), (x1, y1)], fill=(255, 255, 255), width=2)
 
     for angle in range(min_progression_deg, max_progression_deg - 10, step_minor_ticks):
-        x0 = width / 2 + (width / 2 - scale(width, 12.3)) * np.cos(np.deg2rad(angle))
-        y0 = height / 2 + (height / 2 - scale(height, 12.3)) * np.sin(np.deg2rad(angle))
-        x1 = width / 2 + (width / 2 - scale(width, 12.5)) * np.cos(np.deg2rad(angle))
-        y1 = height / 2 + (height / 2 - scale(width, 12.5)) * np.sin(np.deg2rad(angle))
+        x0 = width / 2 + (width / 2 - scale(width, 11.8)) * np.cos(np.deg2rad(angle))
+        y0 = height / 2 + (height / 2 - scale(height, 11.8)) * np.sin(np.deg2rad(angle))
+        x1 = width / 2 + (width / 2 - scale(width, 12)) * np.cos(np.deg2rad(angle))
+        y1 = height / 2 + (height / 2 - scale(width, 12)) * np.sin(np.deg2rad(angle))
         draw.line([(x0, y0), (x1, y1)], fill=(255, 255, 255), width=1)
 
     # Inner rings
