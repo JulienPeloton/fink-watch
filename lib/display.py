@@ -82,31 +82,33 @@ def main(width=240, height=240):
 
     # Draw polygone de la meme maniere que les traits (x0, y0, ...)
     # Angles are measured from 3 o’clock, increasing clockwise.
-    angles = range(90, 360, 25)
+    w = 20
+    space = 1
+    angles = range(90, 360, w + space)
     for index, angle in enumerate(angles):
         x0 = width / 2 + (width / 2 - scale(width, 16.6)) * np.cos(np.deg2rad(angle))
         y0 = width / 2 + (width / 2 - scale(width, 16.6)) * np.sin(np.deg2rad(angle))
         x1 = width / 2 + (width / 2 - scale(width, 25)) * np.cos(np.deg2rad(angle))
         y1 = width / 2 + (width / 2 - scale(width, 25)) * np.sin(np.deg2rad(angle))
-        x2 = width / 2 + (width / 2 - scale(width, 16.6)) * np.cos(np.deg2rad(angle+20))
-        y2 = width / 2 + (width / 2 - scale(width, 16.6)) * np.sin(np.deg2rad(angle+20))
-        x3 = width / 2 + (width / 2 - scale(width, 25)) * np.cos(np.deg2rad(angle+20))
-        y3 = width / 2 + (width / 2 - scale(width, 25)) * np.sin(np.deg2rad(angle+20))
+        x2 = width / 2 + (width / 2 - scale(width, 16.6)) * np.cos(np.deg2rad(angle+w))
+        y2 = width / 2 + (width / 2 - scale(width, 16.6)) * np.sin(np.deg2rad(angle+w))
+        x3 = width / 2 + (width / 2 - scale(width, 25)) * np.cos(np.deg2rad(angle+w))
+        y3 = width / 2 + (width / 2 - scale(width, 25)) * np.sin(np.deg2rad(angle+w))
         draw.polygon([(x0, y0),(x2, y2),(x3, y3),(x1, y1)], fill = (*central_dot, 40), width = 2)
 
 
     # Draw polygone de la meme maniere que les traits (x0, y0, ...)
     # Angles are measured from 3 o’clock, increasing clockwise.
-    angles = range(90, 200, 25)
+    angles = range(90, 200, w + space)
     for index, angle in enumerate(angles):
         x0 = width / 2 + (width / 2 - scale(width, 16.6)) * np.cos(np.deg2rad(angle))
         y0 = width / 2 + (width / 2 - scale(width, 16.6)) * np.sin(np.deg2rad(angle))
         x1 = width / 2 + (width / 2 - scale(width, 25)) * np.cos(np.deg2rad(angle))
         y1 = width / 2 + (width / 2 - scale(width, 25)) * np.sin(np.deg2rad(angle))
-        x2 = width / 2 + (width / 2 - scale(width, 16.6)) * np.cos(np.deg2rad(angle+20))
-        y2 = width / 2 + (width / 2 - scale(width, 16.6)) * np.sin(np.deg2rad(angle+20))
-        x3 = width / 2 + (width / 2 - scale(width, 25)) * np.cos(np.deg2rad(angle+20))
-        y3 = width / 2 + (width / 2 - scale(width, 25)) * np.sin(np.deg2rad(angle+20))
+        x2 = width / 2 + (width / 2 - scale(width, 16.6)) * np.cos(np.deg2rad(angle+w))
+        y2 = width / 2 + (width / 2 - scale(width, 16.6)) * np.sin(np.deg2rad(angle+w))
+        x3 = width / 2 + (width / 2 - scale(width, 25)) * np.cos(np.deg2rad(angle+w))
+        y3 = width / 2 + (width / 2 - scale(width, 25)) * np.sin(np.deg2rad(angle+w))
         transparency = int(255 - index * 255/len(angles))
         draw.polygon([(x0, y0),(x2, y2),(x3, y3),(x1, y1)], fill = (*central_dot, 255), width = 2)
 
