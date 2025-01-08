@@ -18,6 +18,7 @@ else:
         disp.clear()
         #Set the backlight to 100
         disp.bl_DutyCycle(50)
+        image = image.rotate(180)
         disp.ShowImage(image)
         disp.module_exit()
     except IOError as e:
