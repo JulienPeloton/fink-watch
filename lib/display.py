@@ -7,9 +7,15 @@ from lib.colors import framboise, dark_framboise, light_blue, dark_blue, central
 
 def main(width=240, height=240, progression=120000):
     # Angles are measured from 3 o’clock, increasing clockwise.
+    alert_per_deg = 1000
     min_progression_deg = 90
     max_progression_deg = 360
-    alert_per_deg = 1000
+    progression_deg = np.min(
+        (
+            max_progression_deg - min_progression_deg,
+            progression / alert_per_deg
+        )
+    ) + 90
 
     # Create blank image for drawing.
     background = Image.new("RGB", (width, height), "BLACK")
@@ -46,6 +52,7 @@ def main(width=240, height=240, progression=120000):
     )
 
     draw.arc((30, 30, width - 30, height - 30), 0, 360, fill=(*framboise, 120), width=8)
+    draw.arc((30, 30, width - 30, height - 30), 90, int(progression_deg), fill=framboise, width=8)
 
     step_major_ticks = 10
     step_minor_ticks = 2
@@ -73,7 +80,8 @@ def main(width=240, height=240, progression=120000):
         transparency = int(255 / (np.abs(i - 10) + 1))
         draw.arc((radius, radius, width - radius, height - radius), 0, 360, fill=(*dark_blue, transparency), width=4)
 
-    draw.arc((scale(width, 27), scale(height, 27), width - scale(width, 27), height - scale(height, 27)), 0, 360, fill=framboise, width=3)
+    draw.arc((scale(width, 27), scale(height, 27), width - scale(width, 27), height - scale(height, 27)), 90, 360, fill=dark_framboise, width=3)
+    draw.arc((scale(width, 27), scale(height, 27), width - scale(width, 27), height - scale(height, 27)), 90, int(progression_deg), fill=framboise, width=3)
 
     size = 35
     font = ImageFont.truetype("fonts/DS-DIGIB.TTF", size)
@@ -98,12 +106,6 @@ def main(width=240, height=240, progression=120000):
 
     # Draw polygone de la meme maniere que les traits (x0, y0, ...)
     # Angles are measured from 3 o’clock, increasing clockwise.
-    progression_deg = np.min(
-        (
-            max_progression_deg - min_progression_deg, 
-            progression / alert_per_deg
-        )
-    ) + 90
     angles = range(min_progression_deg, int(progression_deg), w + space)
     for index, angle in enumerate(angles):
         x0 = width / 2 + (width / 2 - scale(width, 16.6)) * np.cos(np.deg2rad(angle))
