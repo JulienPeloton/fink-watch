@@ -80,7 +80,7 @@ def main(width=240, height=240):
 
     size = 35
     font = ImageFont.truetype("fonts/DS-DIGIB.TTF", size)
-    draw.text((width/2, width/2 - size / 3), "120k", anchor="mb", font=font)
+    draw.text((width/2, width/2 - size / 3), "120k", anchor="mt", font=font)
 
     # Draw polygone de la meme maniere que les traits (x0, y0, ...)
     # Angles are measured from 3 o’clock, increasing clockwise.
