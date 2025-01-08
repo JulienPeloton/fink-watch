@@ -65,7 +65,7 @@ def main(width=240, height=240):
     for i in range(20):
         radius = scale(width, 28 + i / 5)
         transparency = int(255 / (np.abs(i - 10) + 1))
-        draw.arc((radius, radius, width - radius, height - radius), 0, 360, fill=(*light_blue, transparency), width=4)
+        draw.arc((radius, radius, width - radius, height - radius), 0, 360, fill=(*dark_blue, transparency), width=4)
 
     #draw.arc((160, 160, width - 160, height - 160), 0, 360, fill=light_blue, width=4)
     #draw.arc((163, 163, width - 160, height - 160), 0, 360, fill=light_blue, width=4)
