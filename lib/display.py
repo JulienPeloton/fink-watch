@@ -99,8 +99,11 @@ def main(width=240, height=240, progression=120000):
     # Draw polygone de la meme maniere que les traits (x0, y0, ...)
     # Angles are measured from 3 o’clock, increasing clockwise.
     progression_deg = np.min(
-        max_progression_deg - min_progression_deg, 
-        progression / alert_per_deg) + 90
+        (
+            max_progression_deg - min_progression_deg, 
+            progression / alert_per_deg
+        )
+    ) + 90
     angles = range(min_progression_deg, progression_deg, w + space)
     for index, angle in enumerate(angles):
         x0 = width / 2 + (width / 2 - scale(width, 16.6)) * np.cos(np.deg2rad(angle))
