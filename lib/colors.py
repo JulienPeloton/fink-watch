@@ -1,5 +1,5 @@
-framboise = (244, 18, 105)
+framboise = (245, 98, 46)
 dark_framboise = (105, 5, 43, 120)
 light_blue = (59, 59, 196)
-dark_blue = (0, 0, 88)
+dark_blue = (21, 40, 79)
 central_dot = (18, 218, 244)
