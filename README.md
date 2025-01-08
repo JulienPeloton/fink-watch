@@ -4,7 +4,11 @@ This repository contains the script to display the number of alerts per night pr
 
 ## Display
 
-![watch](pictures/watch_240.png)
+<p float="left">
+  <img src="pictures/watch_240_10k.png" width="100" />
+  <img src="pictures/watch_240.png" width="100" /> 
+  <img src="pictures/watch_240_205k.png" width="100" />
+</p>
 
 screenshot with arrow
 
