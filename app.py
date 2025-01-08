@@ -1,10 +1,23 @@
+# Copyright 2025 Julien Peloton
+# Author: Julien Peloton
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""Launch the Fink watch"""
+
 import logging
 from time import sleep
-import numpy as np
 from lib.display import main
 from lib.utils import generate_logo
-
-from PIL import Image
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -21,7 +34,7 @@ else:
         disp.Init()
         # Clear display.
         disp.clear()
-        #Set the backlight to 100
+        # Set the backlight to 50
         disp.bl_DutyCycle(50)
 
         # Logo intro
@@ -29,14 +42,16 @@ else:
         disp.ShowImage(logo)
         sleep(2)
 
+        count = 0
         while True:
-            # Randomly show the logo
-            rand = np.random.randint(0, 60)
-            if rand == 20:
+            # Show the logo every 60 seconds
+            if count % 60:
                 disp.ShowImage(logo)
                 sleep(2)
 
             # Kafka polling
+            import numpy as np
+
             count = np.random.randint(0, 300000)
 
             # Generate image
@@ -44,6 +59,7 @@ else:
             image = image.rotate(180)
             disp.ShowImage(image)
             sleep(1)
+            count += 1
         disp.module_exit()
     except IOError as e:
         logging.info(e)
@@ -51,4 +67,3 @@ else:
         disp.module_exit()
         logging.info("quit:")
         exit()
-
