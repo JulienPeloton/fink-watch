@@ -71,10 +71,10 @@ def main():
             disp.ShowImage(logo)
             sleep(2)
 
-            count = 0
+            counter = 0
             while True:
                 # Show the logo every 60 seconds
-                if count % 60 == 0:
+                if counter % 60 == 0:
                     disp.ShowImage(logo)
                     sleep(2)
 
@@ -82,14 +82,14 @@ def main():
                 # TODO
                 import numpy as np
 
-                count = np.random.randint(0, 300000)
+                nalerts = np.random.randint(0, 300000)
 
                 # Generate image
-                image = screen(progression=count)
+                image = screen(progression=nalerts)
                 image = image.rotate(180)
                 disp.ShowImage(image)
                 sleep(1)
-                count += 1
+                counter += 1
             disp.module_exit()
         except IOError as e:
             logging.info(e)
