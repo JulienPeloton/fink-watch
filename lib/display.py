@@ -21,11 +21,6 @@ def main(width=240, height=240, progression=120000):
     background = Image.new("RGB", (width, height), "BLACK")
     draw = ImageDraw.Draw(background, "RGBA")
 
-    img = Image.open('pictures/Fink_SecondaryLogo_WEB.png', 'r')
-    img = img.resize((30, 30))
-    background.paste(img, (int(width/2) - 15, int(height/2) - 40))
-
-
     # Calibration
     #draw.point((120, 120), fill="WHITE")
 
@@ -123,6 +118,7 @@ def main(width=240, height=240, progression=120000):
         y3 = width / 2 + (width / 2 - scale(width, 25)) * np.sin(np.deg2rad(angle+w))
         transparency = int(255 - index * 255/len(angles))
         draw.polygon([(x0, y0),(x2, y2),(x3, y3),(x1, y1)], fill = (*central_dot, 255), width = 2)
+
 
     return background
 
