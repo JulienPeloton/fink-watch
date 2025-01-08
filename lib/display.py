@@ -17,8 +17,14 @@
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 
-from lib.utils import draw_circles_with_gradient, scale
-from lib.colors import fink_orange, dark_fink_orange, light_blue, dark_blue, polygon_color
+from lib.utils import draw_arcs_with_gradient, scale
+from lib.colors import (
+    fink_orange,
+    dark_fink_orange,
+    light_blue,
+    dark_blue,
+    polygon_color,
+)
 
 
 def screen(width=240, height=240, progression=120000):
@@ -55,7 +61,7 @@ def screen(width=240, height=240, progression=120000):
     coord_full = (0, 0, width, height)
     draw.arc(coord_full, 0, 360, fill=dark_fink_orange, width=4)
 
-    draw_circles_with_gradient(
+    draw_arcs_with_gradient(
         draw,
         coord=coord_full,
         f_co=dark_blue,
@@ -67,7 +73,7 @@ def screen(width=240, height=240, progression=120000):
     )
 
     # Second ring
-    draw_circles_with_gradient(
+    draw_arcs_with_gradient(
         draw,
         coord=(
             scale(width, 4),
@@ -84,9 +90,25 @@ def screen(width=240, height=240, progression=120000):
     )
 
     # Third rings
-    draw.arc((scale(width, 12.5), scale(height, 12.5), width - scale(width, 12.5), height - scale(height, 12.5)), 0, 360, fill=(*fink_orange, 120), width=8)
     draw.arc(
-        (scale(width, 12.5), scale(height, 12.5), width - scale(width, 12.5), height - scale(height, 12.5)),
+        (
+            scale(width, 12.5),
+            scale(height, 12.5),
+            width - scale(width, 12.5),
+            height - scale(height, 12.5),
+        ),
+        0,
+        360,
+        fill=(*fink_orange, 120),
+        width=8,
+    )
+    draw.arc(
+        (
+            scale(width, 12.5),
+            scale(height, 12.5),
+            width - scale(width, 12.5),
+            height - scale(height, 12.5),
+        ),
         90,
         int(progression_deg),
         fill=fink_orange,
@@ -194,7 +216,9 @@ def screen(width=240, height=240, progression=120000):
         y3 = width / 2 + (width / 2 - scale(width, 25)) * np.sin(np.deg2rad(angle + w))
         transparency = int(255 - index * 255 / len(angles))
         draw.polygon(
-            [(x0, y0), (x2, y2), (x3, y3), (x1, y1)], fill=(*polygon_color, 255), width=2
+            [(x0, y0), (x2, y2), (x3, y3), (x1, y1)],
+            fill=(*polygon_color, 255),
+            width=2,
         )
 
     return background
