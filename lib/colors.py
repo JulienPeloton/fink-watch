@@ -1,4 +1,4 @@
-framboise = (245, 98, 46)
+framboise = (229, 68, 11)
 dark_framboise = (105, 5, 43, 120)
 light_blue = (59, 59, 196)
 dark_blue = (21, 40, 79)

@@ -40,7 +40,7 @@ def main(width=240, height=240):
         width=5
     )
 
-    draw.arc((30, 30, width - 30, height - 30), 0, 360, fill=framboise, width=8)
+    draw.arc((30, 30, width - 30, height - 30), 0, 360, fill=(*framboise, 120), width=8)
 
     # Angles are measured from 3 o’clock, increasing clockwise.
     for angle in range(90, 360, 10):
