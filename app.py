@@ -24,12 +24,10 @@ else:
         disp.bl_DutyCycle(50)
 
         # Logo intro
-        background = Image.new("RGB", (240, 240), "BLACK")
         img = Image.open('pictures/Fink_PrimaryLogo_WEB.png')
         img = img.convert("RGBA")
         img = img.resize((240, 240))
-        background.paste(img, (0, 0))
-        disp.ShowImage()
+        disp.ShowImage(img)
         sleep(2)
 
         while True:
