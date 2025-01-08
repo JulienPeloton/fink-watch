@@ -63,14 +63,14 @@ def main(width=240, height=240):
         draw.line([(x0, y0),(x1, y1)], fill = (255, 255, 255), width = 1)
 
     for i in range(20):
-        radius = scale(width, 33.3 + i / 10)
+        radius = scale(width, 28 + i / 5)
         transparency = int(255 / (np.abs(i - 10) + 1))
         draw.arc((radius, radius, width - radius, height - radius), 0, 360, fill=(*light_blue, transparency), width=4)
 
     #draw.arc((160, 160, width - 160, height - 160), 0, 360, fill=light_blue, width=4)
     #draw.arc((163, 163, width - 160, height - 160), 0, 360, fill=light_blue, width=4)
 
-    draw.arc((scale(width, 38.5), scale(height, 38.5), width - scale(width, 38.5), height - scale(height, 38.5)), 0, 360, fill=framboise, width=3)
+    draw.arc((scale(width, 27), scale(height, 27), width - scale(width, 27), height - scale(height, 27)), 0, 360, fill=framboise, width=3)
 
     #for i in range(20):
     #    radius = 220 + i
@@ -82,8 +82,8 @@ def main(width=240, height=240):
 
     # Draw polygone de la meme maniere que les traits (x0, y0, ...)
     # Angles are measured from 3 o’clock, increasing clockwise.
-    w = 20
-    space = 1
+    w = 7
+    space = 3
     angles = range(90, 360, w + space)
     for index, angle in enumerate(angles):
         x0 = width / 2 + (width / 2 - scale(width, 16.6)) * np.cos(np.deg2rad(angle))
