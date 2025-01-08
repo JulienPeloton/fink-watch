@@ -2,6 +2,7 @@ import logging
 from time import sleep
 import numpy as np
 from lib.display import main
+from lib.utils import generate_logo
 
 from PIL import Image
 
@@ -24,13 +25,17 @@ else:
         disp.bl_DutyCycle(50)
 
         # Logo intro
-        img = Image.open('pictures/Fink_PrimaryLogo_WEB.png')
-        img = img.convert("RGBA")
-        img = img.resize((240, 240))
-        disp.ShowImage(img)
+        logo = generate_logo()
+        disp.ShowImage(logo)
         sleep(2)
 
         while True:
+            # Randomly show the logo
+            rand = np.random.randint(0, 60)
+            if rand == 60:
+                disp.ShowImage(logo)
+                sleep(2)
+
             # Kafka polling
             count = np.random.randint(0, 300000)
 

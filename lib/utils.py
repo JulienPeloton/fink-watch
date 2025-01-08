@@ -1,6 +1,15 @@
+from PIL import Image
+
+def generate_logo():
+    # Logo intro
+    img = Image.open('pictures/Fink_SecondaryLogo_WEB.png')
+    img = img.convert("RGBA")
+    img = img.resize((240, 240))
+    img = img.rotate(180)
+    return img
+
 def scale(size, pc):
     return pc / 100 * size
-
 
 # Gradient
 def interpolate(f_co, t_co, interval):
