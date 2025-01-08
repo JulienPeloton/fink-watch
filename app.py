@@ -1,5 +1,6 @@
 import logging
 from time import sleep
+import numpy as np
 from lib.display import main
 
 logging.basicConfig(level=logging.DEBUG)
