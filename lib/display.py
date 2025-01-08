@@ -1,3 +1,19 @@
+# Copyright 2025 Julien Peloton
+# Author: Julien Peloton
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""Create the screen for the watch"""
+
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 
@@ -5,8 +21,24 @@ from lib.utils import draw_circles_with_gradient, scale
 from lib.colors import framboise, dark_framboise, light_blue, dark_blue, central_dot
 
 
-def main(width=240, height=240, progression=120000):
-    # Angles are measured from 3 o’clock, increasing clockwise.
+def screen(width=240, height=240, progression=120000):
+    """Image to flash on the LCD screen of the watch
+
+    Parameters
+    ----------
+    width: int
+        Width size in pixels. Default is 240
+    height: int
+        Height size in pixels. Default is 240
+    progression: int
+        Number of incoming alerts
+
+    Returns
+    -------
+    out: Image
+        Image to be shown on screen
+    """
+    # Angles are measured from 3 o'clock, increasing clockwise.
     alert_per_deg = 1000
     min_progression_deg = 90
     max_progression_deg = 360
@@ -18,9 +50,6 @@ def main(width=240, height=240, progression=120000):
     # Create blank image for drawing.
     background = Image.new("RGB", (width, height), "BLACK")
     draw = ImageDraw.Draw(background, "RGBA")
-
-    # Calibration
-    # draw.point((120, 120), fill="WHITE")
 
     # Outer ring
     coord_full = (0, 0, width, height)
@@ -37,7 +66,7 @@ def main(width=240, height=240, progression=120000):
         width=5,
     )
 
-    # Second round
+    # Second ring
     draw_circles_with_gradient(
         draw,
         coord=(
@@ -54,6 +83,7 @@ def main(width=240, height=240, progression=120000):
         width=5,
     )
 
+    # Third rings
     draw.arc((30, 30, width - 30, height - 30), 0, 360, fill=(*framboise, 120), width=8)
     draw.arc(
         (30, 30, width - 30, height - 30),
@@ -63,6 +93,7 @@ def main(width=240, height=240, progression=120000):
         width=8,
     )
 
+    # Ticks
     step_major_ticks = 10
     step_minor_ticks = 2
     for angle in range(min_progression_deg, max_progression_deg, step_major_ticks):
@@ -72,11 +103,6 @@ def main(width=240, height=240, progression=120000):
         y1 = height / 2 + (height / 2 - scale(height, 12.5)) * np.sin(np.deg2rad(angle))
         draw.line([(x0, y0), (x1, y1)], fill=(255, 255, 255), width=2)
 
-        # if angle % 20:
-        #    x2 = width / 2 + (width / 2 - 75) * np.cos(np.deg2rad(angle))
-        #    y2 = width / 2 + (width / 2 - 75) * np.sin(np.deg2rad(angle))
-        #    draw.text((x2, y2), "{}k".format(angle-90), anchor="ms")
-
     for angle in range(min_progression_deg, max_progression_deg - 10, step_minor_ticks):
         x0 = width / 2 + (width / 2 - scale(width, 12.3)) * np.cos(np.deg2rad(angle))
         y0 = height / 2 + (height / 2 - scale(height, 12.3)) * np.sin(np.deg2rad(angle))
@@ -84,6 +110,7 @@ def main(width=240, height=240, progression=120000):
         y1 = height / 2 + (height / 2 - scale(width, 12.5)) * np.sin(np.deg2rad(angle))
         draw.line([(x0, y0), (x1, y1)], fill=(255, 255, 255), width=1)
 
+    # Inner rings
     for i in range(20):
         radius = scale(width, 28 + i / 5)
         transparency = int(255 / (np.abs(i - 10) + 1))
@@ -120,6 +147,7 @@ def main(width=240, height=240, progression=120000):
         width=3,
     )
 
+    # Text: number of alerts
     size = 35
     font = ImageFont.truetype("fonts/DS-DIGIB.TTF", size)
     draw.text(
@@ -129,8 +157,7 @@ def main(width=240, height=240, progression=120000):
         font=font,
     )
 
-    # Draw polygone de la meme maniere que les traits (x0, y0, ...)
-    # Angles are measured from 3 o’clock, increasing clockwise.
+    # Polygons
     w = 7
     space = 3
     angles = range(min_progression_deg, max_progression_deg, w + space)
@@ -151,8 +178,6 @@ def main(width=240, height=240, progression=120000):
             [(x0, y0), (x2, y2), (x3, y3), (x1, y1)], fill=(*central_dot, 40), width=2
         )
 
-    # Draw polygone de la meme maniere que les traits (x0, y0, ...)
-    # Angles are measured from 3 o’clock, increasing clockwise.
     angles = range(min_progression_deg, int(progression_deg), w + space)
     for index, angle in enumerate(angles):
         x0 = width / 2 + (width / 2 - scale(width, 16.6)) * np.cos(np.deg2rad(angle))

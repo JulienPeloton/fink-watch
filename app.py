@@ -14,56 +14,90 @@
 # limitations under the License.
 """Launch the Fink watch"""
 
+import argparse
 import logging
 from time import sleep
-from lib.display import main
+from lib.display import screen
 from lib.utils import generate_logo
 
 logging.basicConfig(level=logging.DEBUG)
 
-image = main()
 
-LOCAL = True
-if LOCAL:
-    image.show()
-else:
-    from lib.LCD_1inch28 import LCD_1inch28
+def main():
+    """Launch the Fink watch"""
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--local",
+        action="store_true",
+        help="If specified, display on the local computer instead of the LCD screen",
+    )
+    parser.add_argument(
+        "-width",
+        type=int,
+        default=240,
+        help="Width size in pixels. Default is 240",
+    )
+    parser.add_argument(
+        "-height",
+        type=int,
+        default=240,
+        help="Height size in pixels. Default is 240",
+    )
 
-    try:
-        disp = LCD_1inch28()
-        disp.Init()
-        # Clear display.
-        disp.clear()
-        # Set the backlight to 50
-        disp.bl_DutyCycle(50)
+    args = parser.parse_args(None)
 
-        # Logo intro
-        logo = generate_logo()
-        disp.ShowImage(logo)
-        sleep(2)
+    image = screen(width=args.width, height=args.height)
 
-        count = 0
-        while True:
-            # Show the logo every 60 seconds
-            if count % 60:
-                disp.ShowImage(logo)
-                sleep(2)
+    if args.local:
+        image.show()
+    else:
+        assert args.width == 240, "This program works only for 240x240 resolution"
+        assert args.height == 240, "This program works only for 240x240 resolution"
 
-            # Kafka polling
-            import numpy as np
+        from lib.LCD_1inch28 import LCD_1inch28
 
-            count = np.random.randint(0, 300000)
+        try:
+            disp = LCD_1inch28()
+            disp.Init()
 
-            # Generate image
-            image = main(progression=count)
-            image = image.rotate(180)
-            disp.ShowImage(image)
-            sleep(1)
-            count += 1
-        disp.module_exit()
-    except IOError as e:
-        logging.info(e)
-    except KeyboardInterrupt:
-        disp.module_exit()
-        logging.info("quit:")
-        exit()
+            # Clear display.
+            disp.clear()
+
+            # Set the backlight to 50
+            disp.bl_DutyCycle(50)
+
+            # Logo intro
+            logo = generate_logo()
+            disp.ShowImage(logo)
+            sleep(2)
+
+            count = 0
+            while True:
+                # Show the logo every 60 seconds
+                if count % 60:
+                    disp.ShowImage(logo)
+                    sleep(2)
+
+                # Kafka polling
+                # TODO
+                import numpy as np
+
+                count = np.random.randint(0, 300000)
+
+                # Generate image
+                image = screen(progression=count)
+                image = image.rotate(180)
+                disp.ShowImage(image)
+                sleep(1)
+                count += 1
+            disp.module_exit()
+        except IOError as e:
+            logging.info(e)
+        except KeyboardInterrupt:
+            disp.module_exit()
+            logging.info("quit:")
+            exit()
+
+
+if __name__ == "__main__":
+    main()
