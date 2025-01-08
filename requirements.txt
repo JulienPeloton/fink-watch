@@ -2,3 +2,6 @@ spidev
 numpy
 pillow
 gpiozero
+
+# For linting and reformating
+# ruff
