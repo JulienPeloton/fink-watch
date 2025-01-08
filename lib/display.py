@@ -170,7 +170,7 @@ def screen(width=240, height=240, progression=120000):
     )
 
     # Text: number of alerts
-    size = 35
+    size = scale(width, 14)
     font = ImageFont.truetype("fonts/DS-DIGIB.TTF", size)
     draw.text(
         (width / 2, width / 2 - size / 3),
