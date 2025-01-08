@@ -1,4 +1,5 @@
 import logging
+from time import sleep
 from lib.display import main
 
 logging.basicConfig(level=logging.DEBUG)
@@ -18,8 +19,16 @@ else:
         disp.clear()
         #Set the backlight to 100
         disp.bl_DutyCycle(50)
-        image = image.rotate(180)
-        disp.ShowImage(image)
+
+        while True:
+            # Kafka polling
+            count = np.random.randint(0, 300000)
+
+            # Generate image
+            image = main(progression=count)
+            image = image.rotate(180)
+            disp.ShowImage(image)
+            sleep(1)
         disp.module_exit()
     except IOError as e:
         logging.info(e)
