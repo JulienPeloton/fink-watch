@@ -104,7 +104,7 @@ def main(width=240, height=240, progression=120000):
             progression / alert_per_deg
         )
     ) + 90
-    angles = range(min_progression_deg, progression_deg, w + space)
+    angles = range(min_progression_deg, int(progression_deg), w + space)
     for index, angle in enumerate(angles):
         x0 = width / 2 + (width / 2 - scale(width, 16.6)) * np.cos(np.deg2rad(angle))
         y0 = width / 2 + (width / 2 - scale(width, 16.6)) * np.sin(np.deg2rad(angle))
