@@ -77,8 +77,10 @@ def main(width=240, height=240):
     #    transparency = int(i * 255 / 20)
     #    print(transparency)
     #    draw.arc((radius, radius, width - radius, height - radius), 0, 360, fill=(*central_dot, transparency), width=2)
-    font = ImageFont.truetype("fonts/DS-DIGIB.TTF", 25)
-    draw.text((width/2, width/2), "120k", anchor="mb", font=font)
+
+    size = 35
+    font = ImageFont.truetype("fonts/DS-DIGIB.TTF", size)
+    draw.text((width/2, width/2 - size / 3), "120k", anchor="mb", font=font)
 
     # Draw polygone de la meme maniere que les traits (x0, y0, ...)
     # Angles are measured from 3 o’clock, increasing clockwise.
