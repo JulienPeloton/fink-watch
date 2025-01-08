@@ -21,6 +21,11 @@ def main(width=240, height=240, progression=120000):
     background = Image.new("RGB", (width, height), "BLACK")
     draw = ImageDraw.Draw(background, "RGBA")
 
+    img = Image.open('pictures/Fink_SecondaryLogo_WEB.png', 'r')
+    img = img.resize((30, 30))
+    background.paste(img, (int(width/2) - 15, int(height/2) - 40))
+
+
     # Calibration
     #draw.point((120, 120), fill="WHITE")
 
