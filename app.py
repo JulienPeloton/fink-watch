@@ -74,7 +74,7 @@ def main():
             count = 0
             while True:
                 # Show the logo every 60 seconds
-                if count % 60:
+                if count % 60 == 0:
                     disp.ShowImage(logo)
                     sleep(2)
 
