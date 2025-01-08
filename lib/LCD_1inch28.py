@@ -288,6 +288,7 @@ class LCD_1inch28(lcdconfig.RaspberryPi):
         time.sleep(0.02)
 
     def SetWindows(self, Xstart, Ystart, Xend, Yend):
+        """Set buffer to value of Python Imaging Library image"""
         # set the X coordinates
         self.command(0x2A)
         self.data(0x00)  # Set the horizontal starting point to the high octet
@@ -305,8 +306,13 @@ class LCD_1inch28(lcdconfig.RaspberryPi):
         self.command(0x2C)
 
     def ShowImage(self, Image):
-        """Set buffer to value of Python Imaging Library image."""
-        """Write display buffer to physical display"""
+        """Write display buffer to physical display
+
+        Parameters
+        ----------
+        Image: PILL.Image
+            Image to display
+        """
         imwidth, imheight = Image.size
         if imwidth != self.width or imheight != self.height:
             raise ValueError(
