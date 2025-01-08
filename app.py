@@ -32,7 +32,7 @@ else:
         while True:
             # Randomly show the logo
             rand = np.random.randint(0, 60)
-            if rand == 60:
+            if rand == 20:
                 disp.ShowImage(logo)
                 sleep(2)
 
