@@ -76,7 +76,10 @@ def main():
         image = generate_logo(width=args.width, height=args.height)
     else:
         image = screen(
-            width=args.width, height=args.height, observatory=args.observatory, alert_per_deg=args.alert_per_deg
+            width=args.width,
+            height=args.height,
+            observatory=args.observatory,
+            alert_per_deg=args.alert_per_deg,
         )
 
     if args.local:
@@ -119,10 +122,15 @@ def main():
                     # Kafka polling
                     # TODO
                     import numpy as np
+
                     nalerts = np.random.randint(0, 300000)
 
                     # Generate image
-                    image = screen(progression=nalerts, observatory=args.observatory, alert_per_deg=args.alert_per_deg)
+                    image = screen(
+                        progression=nalerts,
+                        observatory=args.observatory,
+                        alert_per_deg=args.alert_per_deg,
+                    )
                     image = image.rotate(180)
                     disp.ShowImage(image)
                     sleep(1)

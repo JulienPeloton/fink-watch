@@ -34,7 +34,9 @@ from lib.colors import (
 logging.basicConfig(level=logging.DEBUG)
 
 
-def screen(width=240, height=240, progression=120000, observatory="Rubin", alert_per_deg=1000):
+def screen(
+    width=240, height=240, progression=120000, observatory="Rubin", alert_per_deg=1000
+):
     """Image to flash on the LCD screen of the watch
 
     Parameters
