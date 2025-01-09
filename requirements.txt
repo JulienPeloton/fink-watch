@@ -2,6 +2,7 @@ spidev
 numpy
 pillow>=10.4.0
 gpiozero
+rpi-gpio
 tzdata
 
 # For linting and reformating
