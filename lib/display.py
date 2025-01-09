@@ -186,7 +186,7 @@ def screen(width=240, height=240, progression=120000, observatory="Rubin"):
 
     # Clock
     size = scale(width, 11)
-    font = ImageFont.truetype("fonts/DS-DIGIB.TTF", size)
+    font = ImageFont.truetype("fonts/DS-DIGIB.TTF", int(size))
     now = datetime.now(tz=ZoneInfo(observatories[observatory]))
     draw.text(
         (width / 2, width / 2 - size), now.strftime("%H:%M"), anchor="mt", font=font
