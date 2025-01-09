@@ -20,6 +20,7 @@ from time import sleep
 from lib.display import screen
 from lib.utils import generate_logo
 from lib.observatory import observatories
+from lib.poll import poll_last_offset
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -61,6 +62,12 @@ def main():
         type=int,
         default=1000,
         help="Number of alerts per degree (for the alertmeter). Default is 1000",
+    )
+    parser.add_argument(
+        "-topic",
+        type=str,
+        default="fink_sso_fink_candidates_ztf",
+        help="Topic name to read alerts",
     )
 
     args = parser.parse_args(None)
@@ -120,10 +127,9 @@ def main():
                         sleep(2)
 
                     # Kafka polling
-                    # TODO
-                    import numpy as np
-
-                    nalerts = np.random.randint(0, 300000)
+                    # Use YAML to read arg config file
+                    cfg = {}
+                    nalerts = poll_last_offset(cfg, topic=args.topic)
 
                     # Generate image
                     image = screen(
