@@ -6,7 +6,7 @@
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
-#   
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,6 +15,7 @@
 """Get last alert offset"""
 
 import confluent_kafka
+
 
 def poll_last_offset(kafka_config, topic):
     """Return the last offset
@@ -47,11 +48,8 @@ def poll_last_offset(kafka_config, topic):
     committed = consumer.committed(partitions)
     offset = 0
     for partition in committed:
-        (lo, hi) = consumer.get_watermark_offsets(
-            partition, timeout=1, cached=False
-        )
+        _, hi = consumer.get_watermark_offsets(partition, timeout=1, cached=False)
         offset += hi
 
     consumer.close()
     return offset
-

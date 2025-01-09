@@ -4,6 +4,7 @@ pillow>=10.4.0
 gpiozero
 rpi-gpio
 tzdata
+confluent_kafka
 
 # For linting and reformating
 # ruff

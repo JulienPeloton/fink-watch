@@ -60,7 +60,7 @@ def main():
     parser.add_argument(
         "-alert_per_deg",
         type=int,
-        default=1000,
+        default=10000,
         help="Number of alerts per degree (for the alertmeter). Default is 1000",
     )
     parser.add_argument(
@@ -127,8 +127,11 @@ def main():
                         sleep(2)
 
                     # Kafka polling
-                    # Use YAML to read arg config file
-                    cfg = {}
+                    # TODO: proper yaml
+                    cfg = {
+                        "group.id": "fink-watch",
+                        "bootstrap.servers": "134.158.74.95:24499",
+                    }
                     nalerts = poll_last_offset(cfg, topic=args.topic)
 
                     # Generate image
