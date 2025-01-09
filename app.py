@@ -47,7 +47,7 @@ def main():
     parser.add_argument(
         "-display",
         type=str,
-        default="count",
+        default="watch",
         help="What to display on screen: watch, logo. Default is watch.",
     )
     parser.add_argument(
