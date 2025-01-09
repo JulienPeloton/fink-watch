@@ -5,9 +5,8 @@ This repository contains the script to display the number of alerts per night pr
 ## Display
 
 <p float="center">
-  <img src="pictures/watch_240_10k.png" width="240" />
-  <img src="pictures/watch_240.png" width="240" /> 
-  <img src="pictures/watch_240_205k.png" width="240" />
+  <img src="pictures/watch_240_ztf.png" width="240" />
+  <img src="pictures/watch_240_rubin.png" width="240" /> 
 </p>
 
 screenshot with arrow
@@ -20,4 +19,7 @@ picture of the real thing
 
 ## Deployment on a Raspberry
 
+## Acknowledgments
 
+- Waveshare
+- @HG for providing the name!

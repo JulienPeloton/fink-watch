@@ -34,7 +34,7 @@ from lib.colors import (
 logging.basicConfig(level=logging.DEBUG)
 
 
-def screen(width=240, height=240, progression=120000, observatory="Rubin"):
+def screen(width=240, height=240, progression=120000, observatory="Rubin", alert_per_deg=1000):
     """Image to flash on the LCD screen of the watch
 
     Parameters
@@ -52,7 +52,6 @@ def screen(width=240, height=240, progression=120000, observatory="Rubin"):
         Image to be shown on screen
     """
     # Angles are measured from 3 o'clock, increasing clockwise.
-    alert_per_deg = 1000
     min_progression_deg = 90
     max_progression_deg = 360
     progression_deg = (
@@ -182,7 +181,7 @@ def screen(width=240, height=240, progression=120000, observatory="Rubin"):
     elif progression < 1e6:
         text = "{}K".format(int(progression / 1e3))
     elif progression < 1e9:
-        text = "{}M".format(int(progression / 1e6))
+        text = "{:.1f}M".format(progression / 1e6)
 
     # Clock
     size = scale(width, 11)
