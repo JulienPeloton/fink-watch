@@ -2,6 +2,7 @@ spidev
 numpy
 pillow
 gpiozero
+tzdata
 
 # For linting and reformating
 # ruff

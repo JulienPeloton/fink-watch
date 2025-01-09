@@ -17,7 +17,7 @@
 from PIL import Image
 
 
-def generate_logo():
+def generate_logo(width=240, height=240):
     """Generate the logo for the screen
 
     Returns
@@ -27,7 +27,7 @@ def generate_logo():
     """
     img = Image.open("pictures/Fink_SecondaryLogo_WEB.png")
     img = img.convert("RGBA")
-    img = img.resize((240, 240))
+    img = img.resize((width, height))
     img = img.rotate(180)
     return img
 

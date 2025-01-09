@@ -14,10 +14,15 @@
 # limitations under the License.
 """Create the screen for the watch"""
 
+import logging
+from zoneinfo import ZoneInfo
+from datetime import datetime
+
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 
 from lib.utils import draw_arcs_with_gradient, scale
+from lib.observatory import observatories
 from lib.colors import (
     fink_orange,
     dark_fink_orange,
@@ -26,8 +31,10 @@ from lib.colors import (
     polygon_color,
 )
 
+logging.basicConfig(level=logging.DEBUG)
 
-def screen(width=240, height=240, progression=120000):
+
+def screen(width=240, height=240, progression=120000, observatory="Rubin"):
     """Image to flash on the LCD screen of the watch
 
     Parameters
@@ -170,11 +177,66 @@ def screen(width=240, height=240, progression=120000):
     )
 
     # Text: number of alerts
-    size = scale(width, 14)
+    if progression < 1e3:
+        text = "{}".format(progression)
+    elif progression < 1e6:
+        text = "{}K".format(int(progression / 1e3))
+    elif progression < 1e9:
+        text = "{}M".format(int(progression / 1e6))
+
+    # Clock
+    size = scale(width, 11)
+    font = ImageFont.truetype("fonts/DS-DIGIB.TTF", size)
+    now = datetime.now(tz=ZoneInfo(observatories[observatory]))
+    draw.text(
+        (width / 2, width / 2 - size), now.strftime("%H:%M"), anchor="mt", font=font
+    )
+
+    size = scale(width, 3)
     font = ImageFont.truetype("fonts/DS-DIGIB.TTF", size)
     draw.text(
-        (width / 2, width / 2 - size / 3),
-        "{}k".format(int(progression / 1000)),
+        (width / 2, width / 2),
+        "---",
+        anchor="mt",
+        font=font,
+    )
+
+    size = scale(width, 7)
+    font = ImageFont.truetype("fonts/DS-DIGIB.TTF", size)
+    draw.text(
+        (width / 2, width / 2 + 2 / 3 * size),
+        observatory,
+        anchor="mt",
+        font=font,
+    )
+
+    # Counter
+    draw.circle(
+        (3 * width / 4, 3 * height / 4),
+        scale(width, 14),
+        fill=(0, 0, 0),
+        width=4,
+    )
+    for i in range(20):
+        radius = scale(width, 16 - i / 5)
+        transparency = int(255 / (np.abs(i - 10) + 1))
+        draw.arc(
+            (
+                3 / 4 * width - radius,
+                3 / 4 * height - radius,
+                3 / 4 * width + radius,
+                3 / 4 * height + radius,
+            ),
+            0,  # 30,
+            360,  # 120,
+            fill=(*dark_blue, transparency),
+            width=2,
+        )
+    size = scale(width, 10)
+    font = ImageFont.truetype("fonts/DS-DIGIB.TTF", size)
+    draw.text(
+        (3 / 4 * width, 3 / 4 * height - size / 3),
+        text,
         anchor="mt",
         font=font,
     )
