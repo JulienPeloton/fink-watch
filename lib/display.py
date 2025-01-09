@@ -193,7 +193,7 @@ def screen(width=240, height=240, progression=120000, observatory="Rubin"):
     )
 
     size = scale(width, 3)
-    font = ImageFont.truetype("fonts/DS-DIGIB.TTF", size)
+    font = ImageFont.truetype("fonts/DS-DIGIB.TTF", int(size))
     draw.text(
         (width / 2, width / 2),
         "---",
@@ -202,7 +202,7 @@ def screen(width=240, height=240, progression=120000, observatory="Rubin"):
     )
 
     size = scale(width, 7)
-    font = ImageFont.truetype("fonts/DS-DIGIB.TTF", size)
+    font = ImageFont.truetype("fonts/DS-DIGIB.TTF", int(size))
     draw.text(
         (width / 2, width / 2 + 2 / 3 * size),
         observatory,
@@ -233,7 +233,7 @@ def screen(width=240, height=240, progression=120000, observatory="Rubin"):
             width=2,
         )
     size = scale(width, 10)
-    font = ImageFont.truetype("fonts/DS-DIGIB.TTF", size)
+    font = ImageFont.truetype("fonts/DS-DIGIB.TTF", int(size))
     draw.text(
         (3 / 4 * width, 3 / 4 * height - size / 3),
         text,
