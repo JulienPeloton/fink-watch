@@ -34,7 +34,7 @@ For local debugging, you only need to install the Python dependencies (tested fo
 python -m venv watchenv
 source watchenv/bin/activate
 
-pip install -r requirements.txt
+pip install .
 ```
 
 ### Raspberry Pi
@@ -68,7 +68,7 @@ Finally install Python dependencies:
 python -m venv watchenv
 source watchenv/bin/activate
 
-pip install -r requirements.txt
+pip install .
 ```
 
 ## Usage

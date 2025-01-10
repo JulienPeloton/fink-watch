@@ -1,0 +1,35 @@
+[project]
+name = "fink-watch"
+requires-python = ">= 3.9"
+license = {file = "LICENSE"}
+readme = "README.md"
+authors = [
+  {name = "Julien Peloton", email = "peloton@ijclab.in2p3.fr"},
+]
+maintainers = [
+  {name = "Julien Peloton", email = "peloton@ijclab.in2p3.fr"}
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+]
+dependencies = [
+  "spidev",
+  "numpy",
+  "pillow>=10.4.0",
+  "gpiozero",
+  "rpi-gpio",
+  "tzdata",
+  "confluent_kafka",
+]
+
+[project.optional-dependencies]
+codequality = [
+  'ruff'
+]
+
+[project.urls]
+Homepage = "https://github.com/JulienPeloton/fink-watch"
+Repository = "https://github.com/JulienPeloton/fink-watch.git"
