@@ -107,7 +107,7 @@ You can simply call the script using:
 
 
 ```bash
-python app.py --local
+python app.py --demo
 ```
 
 And you should see a similar display than the screenshots above. This is quite useful for testing and debugging.
