@@ -21,9 +21,9 @@ from datetime import datetime
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 
-from lib.utils import draw_arcs_with_gradient, scale
-from lib.observatory import observatories
-from lib.colors import (
+from fink_watch.utils import draw_arcs_with_gradient, scale
+from fink_watch.observatory import observatories
+from fink_watch.colors import (
     fink_orange,
     dark_fink_orange,
     light_blue,

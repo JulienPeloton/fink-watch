@@ -18,10 +18,10 @@ import argparse
 import logging
 from datetime import datetime
 from time import sleep
-from lib.display import screen
-from lib.utils import generate_logo
-from lib.observatory import observatories
-from lib.poll import poll_last_offset
+from fink_watch.display import screen
+from fink_watch.utils import generate_logo
+from fink_watch.observatory import observatories
+from fink_watch.poll import poll_last_offset
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -75,7 +75,7 @@ def main():
 
     assert args.display in ["watch", "logo"], "`-display` should be among: watch, logo"
     assert args.observatory in observatories.keys(), (
-        "{} not found in `lib/observatory.py`. Please, edit the file and relaunch.".format(
+        "{} not found in `fink_watch/observatory.py`. Please, edit the file and relaunch.".format(
             args.observatory
         )
     )
@@ -99,7 +99,7 @@ def main():
         assert args.width == 240, "This program works only for 240x240 resolution"
         assert args.height == 240, "This program works only for 240x240 resolution"
 
-        from lib.LCD_1inch28 import LCD_1inch28
+        from fink_watch.LCD_1inch28 import LCD_1inch28
 
         disp = LCD_1inch28()
         disp.Init()

@@ -27,7 +27,7 @@
 # THE SOFTWARE.
 
 import time
-from lib import lcdconfig
+from fink_watch import lcdconfig
 
 
 class LCD_1inch28(lcdconfig.RaspberryPi):
