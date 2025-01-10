@@ -26,6 +26,9 @@ dependencies = [
   "confluent_kafka",
 ]
 
+[tool.setuptools.packages.find]
+include = ["fink_watch"]
+
 [project.optional-dependencies]
 codequality = [
   'ruff'
