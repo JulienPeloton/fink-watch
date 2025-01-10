@@ -1,5 +1,6 @@
 [project]
 name = "fink-watch"
+version = "0.1.0"
 requires-python = ">= 3.9"
 license = {file = "LICENSE"}
 readme = "README.md"
