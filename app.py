@@ -16,6 +16,7 @@
 
 import argparse
 import logging
+from datetime import datetime
 from time import sleep
 from lib.display import screen
 from lib.utils import generate_logo
@@ -29,9 +30,9 @@ def main():
     """Launch the Fink watch"""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--local",
+        "--demo",
         action="store_true",
-        help="If specified, display on the local computer instead of the LCD screen",
+        help="If specified, display a fix image on the local computer instead of the LCD screen",
     )
     parser.add_argument(
         "-width",
@@ -54,20 +55,20 @@ def main():
     parser.add_argument(
         "-observatory",
         type=str,
-        default="Rubin",
-        help="Name of the observatory to set the local time for the `clock` option.",
+        default="ZTF",
+        help="Name of the observatory to set the local time for the `clock` option. Default is ZTF.",
     )
     parser.add_argument(
         "-alert_per_deg",
         type=int,
-        default=10000,
+        default=1000,
         help="Number of alerts per degree (for the alertmeter). Default is 1000",
     )
     parser.add_argument(
         "-topic",
         type=str,
-        default="fink_sso_fink_candidates_ztf",
-        help="Topic name to read alerts",
+        default="fink_ztf_{}".format(datetime.now().strftime("%Y%m%d")),
+        help="Topic name to read alerts. Default is fink_ztf_<YYYYMMDD>.",
     )
 
     args = parser.parse_args(None)
@@ -89,7 +90,7 @@ def main():
             alert_per_deg=args.alert_per_deg,
         )
 
-    if args.local:
+    if args.demo:
         # Display on local computer
         # for debugging
         image.show()
@@ -142,6 +143,8 @@ def main():
                     )
                     image = image.rotate(180)
                     disp.ShowImage(image)
+
+                    # TODO: 1 second is probably overkill...
                     sleep(1)
                     counter += 1
                 disp.module_exit()
